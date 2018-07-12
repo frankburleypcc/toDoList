@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>ToDo List</title>
+    <style>
+        h1 {
+            text-align: center;
+        }
+        ul {
+            list-style: none;
+            padding: 10px;
+            margin: 10px;
+            width: 40%;
+            float: left;
+            border: 1px solid #333;
+            background: #eee;
+        }
+        input {
+            margin-left: auto;
+            margin-right: auto;
+        }
+    
+    </style>
+</head>
+<body>
+    <h1>To Do List</h1>
+    <input type="text" id="input">
+    <button id="btn">ADD HERE</button>
+
+    <br>
+
+    <ul id="todo">
+        <li>To Do</li>
+    </ul>
+    <ul id="done">
+        <li>Done</li>
+    </ul>
+
+    <script>
+        (function() {
+            var input = document.getElementById('input');
+            var btn = document.getElementById('btn');
+            var lists = {
+                todo: document.getElementById('todo'),
+                done: document.getElementById('done')
+            }
+            console.log(input, btn, lists);
+            var makeTaskHtml = function(str) {
+                var el = document.createElement('li');
+                el.textContent = str;
+
+                return el;
+            }
+        }());
+    
+    
+    
+    </script>
+    
+</body>
+</html>
