@@ -18,9 +18,9 @@
             border: 1px solid #333;
             background: #eee;
         }
-        input {
-            margin-left: auto;
-            margin-right: auto;
+        .input {
+            margin-left: 0 auto;
+            margin-right: 0 auto;
         }
     
     </style>
@@ -46,26 +46,57 @@
             var lists = {
                 todo: document.getElementById('todo'),
                 done: document.getElementById('done')
-            }
+            };
             
-            var makeTaskHtml = function(str) {
+            var makeTaskHtml = function(str, onCheck) {
                 var el = document.createElement('li');
                 var checkbox = document.createElement('input');
-                el.textContent = str;
+                var label = document.createElement('span');
                 
                 checkbox.type = 'checkbox';
+                checkbox.addEventListener('click', onCheck);
+                label.textContent = str;
+
                 el.appendChild(checkbox);
+                el.appendChild(label);
+
                 return el;
             };
 
-            var addTask = function(list, task) {
-                list.appendChild(task);
+            var addTask = function(task) {
+                lists.todo.appendChild(task);
             };
 
-            addTask(lists.todo, makeTaskHtml('test the task todo'));
-            addTask(lists.done, makeTaskHtml('test the task done'));
+            var onCheck = function(event) {
+                var task = event.target.parentElement;
+                var list = task.parentElement.id;
 
-            
+                lists[list === 'done' ? 'todo' : 'done'].appendChild(task);
+                this.checked = false;
+                input.focus();
+            }
+
+            var onInput = function() {
+                var str = input.value.trim();
+
+                if (str.length > 0) {
+                    addTask(makeTaskHtml(str, onCheck));
+                    input.value = '';
+                    input.focus();
+                    
+                }
+            }
+
+            btn.addEventListener('click', onInput);
+            input.addEventListener('keyup', function(event){
+                var code = event.keyCode;
+                
+                if (code === 13) {
+                    onInput();
+                }
+            });
+
+            input.focus();
         }());
     
     
