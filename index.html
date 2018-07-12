@@ -47,13 +47,25 @@
                 todo: document.getElementById('todo'),
                 done: document.getElementById('done')
             }
-            console.log(input, btn, lists);
+            
             var makeTaskHtml = function(str) {
                 var el = document.createElement('li');
+                var checkbox = document.createElement('input');
                 el.textContent = str;
-
+                
+                checkbox.type = 'checkbox';
+                el.appendChild(checkbox);
                 return el;
-            }
+            };
+
+            var addTask = function(list, task) {
+                list.appendChild(task);
+            };
+
+            addTask(lists.todo, makeTaskHtml('test the task todo'));
+            addTask(lists.done, makeTaskHtml('test the task done'));
+
+            
         }());
     
     
